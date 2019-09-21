@@ -1,22 +1,35 @@
 name: Apprise
 skillMetadata:
   sections:
-    - name: Options << Name of section
+    - name: Options
       fields:
-        - name: internal_python_variable_name
+        - name: name1
           type: text
-          label: Setting Friendly Display Name
+          label: Service Name #1
           value: ""
-          placeholder: demo prompt in the input box
-    - name: Login << Name of another section
-      fields:
-        - type: label
-          label: Just a little bit of extra info for the user to understand following settings
-        - name: username
+          placeholder: Pushbullet
+        - name: service1
           type: text
-          label: Username
+          label: Service URL #1
           value: ""
-        - name: password
-          type: password
-          label: Password
+          placeholder: pbul://accesstoken
+        - name: name2
+          type: text
+          label: Service Name #2
           value: ""
+          placeholder: Telegram
+        - name: service2
+          type: text
+          label: Service URL #2
+          value: ""
+          placeholder: tgram://bottoken/ChatID
+        - name: name3
+          type: text
+          label: Service Name #3
+          value: ""
+          placeholder: Mailto
+        - name: service3
+          type: text
+          label: Service URL #3
+          value: ""
+          placeholder: mailto://userid:pass@domain.com
