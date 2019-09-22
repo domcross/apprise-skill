@@ -1,35 +1,54 @@
 name: Apprise
 skillMetadata:
   sections:
-    - name: Options
+    - name: Notification services by URL
       fields:
-        - name: name1
+        - name: tag1
           type: text
-          label: Service Name #1
+          label: Service tag 1
           value: ""
           placeholder: Pushbullet
         - name: service1
           type: text
-          label: Service URL #1
+          label: Service URL 1
           value: ""
           placeholder: pbul://accesstoken
-        - name: name2
+        - name: tag2
           type: text
-          label: Service Name #2
+          label: Service tag 2
           value: ""
           placeholder: Telegram
         - name: service2
           type: text
-          label: Service URL #2
+          label: Service URL 2
           value: ""
           placeholder: tgram://bottoken/ChatID
-        - name: name3
+        - name: tag3
           type: text
-          label: Service Name #3
+          label: Service tag 3
           value: ""
           placeholder: Mailto
         - name: service3
           type: text
-          label: Service URL #3
+          label: Service URL 3
           value: ""
           placeholder: mailto://userid:pass@domain.com
+    - name: Configuration file
+      fields:
+        - name: configfile_label
+          type: label
+          label: >
+            <p>
+            Specify a configuration file (.yaml or .txt) on a path that can be read by the user that Mycroft is running with (usually "mycroft").
+            When filename does not begin with "/" the prefix "/opt/mycroft/skills/apprise-skill/" is added, assuming the config file is located in Apprise skills directory folder.
+            </p>
+        - name: tags
+          type: text
+          label: List of tags defined in config file
+          value: ""
+          placeholder: Peter,Paul,Mary
+        - name: configfile
+          type: text
+          label: Configuration file name
+          value: ""
+          placeholder: apprise.yaml

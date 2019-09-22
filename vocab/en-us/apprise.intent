@@ -1,1 +1,1 @@
-apprise {someone} of {something}
+apprise {tag} of {text}
