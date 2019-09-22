@@ -27,24 +27,34 @@ class Apprise(MycroftSkill):
             if name and service:
                 self.log.info("%s - %s" % (name, service))
                 self.services[name.lower()] = service
-                self.apobj.add(service, tag=name)
+                self.apobj.add(service, tag=name.lower())
 
     @intent_file_handler('apprise.intent')
     def handle_apprise(self, message):
         if not self.services:
-            self.speak("error")
+            self.speak_dialog('setup.error')
             return
-
-        #self.log.info(message.data)
+        all_keyword = self.translate("AllKeyword").lower()
+        names = list(self.services.keys())
+        names.append(all_keyword)
+        self.log.info("names %s" % names)
+        # self.log.info(message.data)
         someone = message.data.get("someone")
         something = message.data.get("something")
         self.log.info("%s - %s" % (someone, something))
 
-        best_match, score = match_one(someone.lower(), self.services)
-        self.log.info("%s - %s" % (best_match, score))
+        name, score = match_one(someone.lower(), names)
+        self.log.info("%s - %s" % (name, score))
         if score > 0.9:
-            self.apobj.notify(something, title=something, tag=best_match)
-            self.speak_dialog('apprise', {'someone': someone})
+            if name == all_keyword:
+                success = self.apobj.notify(something, title=something)
+            else:
+                success = self.apobj.notify(something, title=something, tag=name)
+            self.log.info("result %s" % success)
+            if success:
+                self.speak_dialog('apprise', {'someone': name})
+            else:
+                self.speak_dialog('send.error', {'someone': name})
 
 
 def create_skill():
