@@ -3,6 +3,7 @@ from mycroft.util.parse import match_one
 import apprise
 import os.path
 
+
 class Apprise(MycroftSkill):
     def __init__(self):
         self.apobj = None
@@ -28,13 +29,13 @@ class Apprise(MycroftSkill):
         if tags and configfile:
             if configfile[:1] != "/":
                 configfile = "/opt/mycroft/skills/apprise-skill/" + configfile
-            self.log.info("configfile - %s" % configfile)
+            self.log.debug("configfile - %s" % configfile)
             if os.path.isfile(configfile):
                 config = apprise.AppriseConfig()
                 config.add(configfile)
                 self.apobj.add(config)
                 taglist = tags.split(",")
-                self.log.info("taglist: %s" % taglist)
+                self.log.debug("taglist: %s" % taglist)
                 for t in taglist:
                     self.tags[t.strip().lower()] = t.strip()
             else:
