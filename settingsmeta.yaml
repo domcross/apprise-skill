@@ -1,7 +1,7 @@
-name: Apprise
+name: Apprise-Skill
 skillMetadata:
   sections:
-    - name: Notification services by URL
+    - name: Notification services by tag and URL
       fields:
         - name: tag1
           type: text
@@ -39,16 +39,22 @@ skillMetadata:
           type: label
           label: >
             <p>
-            Specify a configuration file (.yaml or .txt) on a path that can be read by the user that Mycroft is running with (usually "mycroft").
-            When filename does not begin with "/" the prefix "/opt/mycroft/skills/apprise-skill/" is added, assuming the config file is located in Apprise skills directory folder.
+            Specify a configuration file (.yaml or .txt) on a path that can be read by the user that Mycroft is running with (usually "mycroft"). For config file usage instructions go to https://github.com/caronc/apprise/wiki/config
+            When filename does not begin with "/" the prefix "/opt/mycroft/skills/apprise-skill/" is added, assuming the config file is located in Apprise-Skills directory folder.
+            </p>
+        - name: configfile
+          type: text
+          label: Configuration file name
+          value: ""
+          placeholder: apprise.yaml
+        - name: tags_label
+          type: label
+          label: >
+            <p>
+            When using a config file please use tags and specifiy all tags as comma seperated list here (please check correct spelling and matching upper/lower case)
             </p>
         - name: tags
           type: text
           label: List of tags defined in config file
           value: ""
           placeholder: Peter,Paul,Mary
-        - name: configfile
-          type: text
-          label: Configuration file name
-          value: ""
-          placeholder: apprise.yaml

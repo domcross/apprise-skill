@@ -24,13 +24,12 @@ class Apprise(MycroftSkill):
         # first load configfile if specified
         tags = self.settings.get("tags", "")
         configfile = self.settings.get("configfile", "")
-        self.log.info("%s - %s" % (tags, configfile))
+        self.log.debug("%s - %s" % (tags, configfile))
         if tags and configfile:
             if configfile[:1] != "/":
                 configfile = "/opt/mycroft/skills/apprise-skill/" + configfile
             self.log.info("configfile - %s" % configfile)
             if os.path.isfile(configfile):
-                self.log.info("is file: %s" % configfile)
                 config = apprise.AppriseConfig()
                 config.add(configfile)
                 self.apobj.add(config)
@@ -39,7 +38,7 @@ class Apprise(MycroftSkill):
                 for t in taglist:
                     self.tags[t.strip().lower()] = t.strip()
             else:
-                self.log.info("no such file: %s" % configfile)
+                self.log.warn("config file does not exist: %s" % configfile)
         # second load tags and service-urls from settings
         for i in range(1, 4):
             tag = self.settings.get("tag{}".format(i), "")
@@ -48,9 +47,7 @@ class Apprise(MycroftSkill):
                 self.tags[tag.lower()] = tag
                 self.apobj.add(service, tag=tag)
 
-        self.log.info("tags - %s" % self.tags)
-        #self.log.info("urls - %s" % self.apobj.urls())
-
+        self.log.debug("tags - %s" % self.tags)
 
     @intent_file_handler('apprise.intent')
     def handle_apprise(self, message):
@@ -60,23 +57,24 @@ class Apprise(MycroftSkill):
         all_keyword = self.translate("AllKeyword")
         tags = self.tags
         tags[all_keyword.lower()] = all_keyword
-        self.log.info("tags %s" % tags)
+        self.log.debug("tags %s" % tags)
         tag = message.data.get("tag")
         text = message.data.get("text")
-        self.log.info("%s - %s" % (tag, text))
+        self.log.debug("tag: %s - text: %s" % (tag, text))
 
+        success = False
         best_tag, score = match_one(tag.lower(), tags)
-        self.log.info("%s - %s" % (best_tag, score))
+        self.log.debug("%s - %s" % (best_tag, score))
         if score > 0.9:
             if best_tag == all_keyword:
                 success = self.apobj.notify(text, title=text)
             else:
                 success = self.apobj.notify(text, title=text, tag=best_tag)
-            self.log.info("result %s" % success)
-            if success:
-                self.speak_dialog('apprise', {'tag': best_tag})
-            else:
-                self.speak_dialog('send.error', {'tag': best_tag})
+            self.log.debug("result %s" % success)
+        if success:
+            self.speak_dialog('send.success', {'tag': best_tag})
+        else:
+            self.speak_dialog('send.error', {'tag': best_tag})
 
 
 def create_skill():

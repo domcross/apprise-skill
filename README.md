@@ -6,6 +6,7 @@ With this skill you can send push notifications to a large number of notificatio
 
 Configure up to three services and/or use a configuration file (e.g. when you do not want to upload your username and password to home.mycroft.ai)
 Please refer to the [apprise lib wiki](https://github.com/caronc/apprise/wiki) for detailed information on service url configuration.
+For config file usage instructions please see the [apprise config file manual](https://github.com/caronc/apprise/wiki/config).
 
 ## Examples
 * "Apprise someone of something"
