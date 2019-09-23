@@ -3,6 +3,13 @@ skillMetadata:
   sections:
     - name: Notification services by tag and URL
       fields:
+        - name: tagurl_label
+          type: label
+          label: >
+            <p>
+            For a detailed list of all supported services and how to configure the service urls please check the
+            <a href="https://github.com/caronc/apprise/wiki">Apprise wiki</a>
+            </p>
         - name: tag1
           type: text
           label: Service tag 1
@@ -39,8 +46,10 @@ skillMetadata:
           type: label
           label: >
             <p>
-            Specify a configuration file (.yaml or .txt) on a path that can be read by the user that Mycroft is running with (usually "mycroft"). For config file usage instructions go to https://github.com/caronc/apprise/wiki/config
-            When filename does not begin with "/" the prefix "/opt/mycroft/skills/apprise-skill/" is added, assuming the config file is located in Apprise-Skills directory folder.
+            Specify a configuration file (.yaml or .txt) on a path that can be read by the user that Mycroft is running with (usually "mycroft").<br/>
+            For config file usage instructions go to <a href="https://github.com/caronc/apprise/wiki/config">Apprise config manual page</a><br/>
+            When filename does not begin with "/" the prefix "/opt/mycroft/skills/apprise-skill/" is added,
+            assuming the config file is located in Apprise-Skills directory folder.
             </p>
         - name: configfile
           type: text
@@ -51,7 +60,7 @@ skillMetadata:
           type: label
           label: >
             <p>
-            When using a config file please use tags and specifiy all tags as comma seperated list here (please check correct spelling and matching upper/lower case)
+            When using a config file please use tags and specifiy all tags as comma seperated list here (please check correct spelling and matching upper/lower case).
             </p>
         - name: tags
           type: text
