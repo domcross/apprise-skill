@@ -13,10 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from mycroft import MycroftSkill, intent_file_handler
-from mycroft.util.parse import match_one
 import apprise
 import os.path
+from mycroft import MycroftSkill, intent_file_handler
+from mycroft.util.parse import match_one
 
 
 class Apprise(MycroftSkill):
