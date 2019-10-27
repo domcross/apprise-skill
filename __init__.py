@@ -27,7 +27,7 @@ class Apprise(MycroftSkill):
 
     def initialize(self):
         self._setup()
-        self.settings.set_changed_callback(self.on_websettings_changed)
+        self.settings_change_callback = self.on_websettings_changed
         self.register_entity_file('tag.entity')
 
     def on_websettings_changed(self):
